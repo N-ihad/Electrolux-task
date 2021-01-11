@@ -21,11 +21,7 @@ class AutobiographyVC: UIViewController {
     }
     
     func configureNavBar() {
-//        let button = UIButton()
-//        button.setImageWithSize(size: 20, systemImgName: "arrow.triangle.2.circlepath")
-//        button.addTarget(self, action: #selector(updateButtonPressed), for: .touchUpInside)
-//        let barButton = UIBarButtonItem(customView: button)
-//        navigationItem.rightBarButtonItem = barButton
+
         navigationItem.title = "Autobiography"
     }
 

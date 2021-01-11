@@ -111,10 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				20298FD425AC504B009522FE /* TabBarController.swift */,
-				20298FB825AC4C80009522FE /* ItemsVC.swift */,
-				207F081325AC7AAC0020633D /* ItemCell.swift */,
-				207F080925AC692C0020633D /* PhotoDetailsVC.swift */,
-				20298FD725AC5074009522FE /* AutobiographyVC.swift */,
+				20DB793025AC93D400C3C844 /* ItemsTab */,
+				20DB793125AC93F000C3C844 /* Autobiography */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -133,6 +131,24 @@
 				207F081025AC6DD50020633D /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		20DB793025AC93D400C3C844 /* ItemsTab */ = {
+			isa = PBXGroup;
+			children = (
+				20298FB825AC4C80009522FE /* ItemsVC.swift */,
+				207F081325AC7AAC0020633D /* ItemCell.swift */,
+				207F080925AC692C0020633D /* PhotoDetailsVC.swift */,
+			);
+			path = ItemsTab;
+			sourceTree = "<group>";
+		};
+		20DB793125AC93F000C3C844 /* Autobiography */ = {
+			isa = PBXGroup;
+			children = (
+				20298FD725AC5074009522FE /* AutobiographyVC.swift */,
+			);
+			path = Autobiography;
 			sourceTree = "<group>";
 		};
 		88E1EFB6B58648D55135F968 /* Frameworks */ = {
