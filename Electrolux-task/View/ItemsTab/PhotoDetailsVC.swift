@@ -13,9 +13,10 @@ class PhotoDetailsVC: UIViewController {
     
     // MARK: - Properties
     
-    private let photoImageView: UIImageView = {
+    private lazy var photoImageView: UIImageView = {
         let photoImageView = UIImageView()
         photoImageView.autoSetDimensions(to: CGSize(width: 300, height: 300))
+        photoImageView.backgroundColor = .imagePlaceholderColor
         photoImageView.dropShadow()
         
         return photoImageView
@@ -74,7 +75,6 @@ class PhotoDetailsVC: UIViewController {
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            // we got back an error!
             showAlertWith(title: "Save error", message: error.localizedDescription)
         } else {
             showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
@@ -94,7 +94,7 @@ class PhotoDetailsVC: UIViewController {
     func configureSubviews() {
         view.addSubview(photoImageView)
         photoImageView.autoAlignAxis(toSuperviewAxis: .vertical)
-        photoImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 170)
+        photoImageView.autoPinEdge(toSuperviewSafeArea: .top, withInset: 12)
         
         view.addSubview(photoTitleLabel)
         photoTitleLabel.autoPinEdge(.top, to: .bottom, of: photoImageView, withOffset: 15)
