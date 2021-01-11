@@ -36,7 +36,6 @@ class AutobiographyVC: UIViewController {
     private let firstNameLabel: UILabel = {
         let firstNameLabel = UILabel()
         firstNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        firstNameLabel.text = "First Name"
         firstNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         
         return firstNameLabel
@@ -44,7 +43,6 @@ class AutobiographyVC: UIViewController {
     
     private let lastNameLabel: UILabel = {
         let lastNameLabel = UILabel()
-        lastNameLabel.text = "Last Namesdssd"
         lastNameLabel.setContentHuggingPriority(.required, for: .horizontal)
         lastNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
