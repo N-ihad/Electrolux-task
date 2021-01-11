@@ -42,6 +42,8 @@ class ItemsVC: UIViewController {
         
         return collectionView
     }()
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,18 +58,26 @@ class ItemsVC: UIViewController {
     // MARK: - API
     
     func fetchElectroluxItems() {
-        showActivityIndicator()
-        NetworkService.shared.getElectroluxItems { [weak self] response in
-            guard let res = response.value else { print("Couldn't fetch Electrolux items"); return }
-            self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+        let queue = DispatchQueue.global(qos: .utility)
+        
+        queue.async {
+            self.showActivityIndicator()
+            NetworkService.shared.getElectroluxItems { [weak self] response in
+                guard let res = response.value else { print("Couldn't fetch Electrolux items"); return }
+                self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+            }
         }
     }
     
     func fetchItems(with name: String) {
-        showActivityIndicator()
-        NetworkService.shared.getItems(with: name) { [weak self] response in
-            guard let res = response.value else { print("Couldn't fetch items with hashtag \(name)"); return }
-            self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+        let queue = DispatchQueue.global(qos: .utility)
+        
+        queue.async {
+            self.showActivityIndicator()
+            NetworkService.shared.getItems(with: name) { [weak self] response in
+                guard let res = response.value else { print("Couldn't fetch items with hashtag \(name)"); return }
+                self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+            }
         }
     }
     
@@ -92,7 +102,6 @@ class ItemsVC: UIViewController {
         collectionView.addSubview(loadingIndicatorView)
         loadingIndicatorView.autoPinEdge(.top, to: .bottom, of: collectionView, withOffset: 150)
         loadingIndicatorView.autoAlignAxis(toSuperviewAxis: .vertical)
-        loadingIndicatorView.autoCenterInSuperviewMargins()
     }
     
     func configureNavBar() {

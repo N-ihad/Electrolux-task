@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ItemViewModel {
+struct ItemViewModel {
     
     var photoURL: URL?
     var photoTitle: String
