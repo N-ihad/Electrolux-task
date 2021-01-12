@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class ItemCell: UICollectionViewCell {
+class PhotoCell: UICollectionViewCell {
     
     // MARK: - Properties
     
@@ -43,8 +43,8 @@ class ItemCell: UICollectionViewCell {
         photoImageView.autoPinEdgesToSuperviewEdges()
     }
     
-    func set(with itemViewModel: ItemViewModel) {
-        self.photoImageView.kf.setImage(with: itemViewModel.photoURL)
+    func set(with photoViewModel: PhotoVM) {
+        self.photoImageView.kf.setImage(with: photoViewModel.URL0)
     }
     
 }

@@ -17,10 +17,10 @@ class AutobiographyVC: UIViewController {
         return scrollView
     }()
     
-    private let scrollViewContainer: UIView = {
-        let scrollViewContainer = UIView()
+    private let scrollViewContentView: UIView = {
+        let scrollViewContentView = UIView()
         
-        return scrollViewContainer
+        return scrollViewContentView
     }()
     
     private let profileImageView: UIImageView = {
@@ -79,16 +79,17 @@ class AutobiographyVC: UIViewController {
     func configureUI() {
         view.backgroundColor = .white
         
-        let profileViewModel = ProfileViewModel(photoURL: Profile.testProfile.avatarURL,
+        let profileViewModel = ProfileVM(photoURL: Profile.testProfile.avatarURL,
                                                 firstName: Profile.testProfile.firstName,
                                                 lastName: Profile.testProfile.lastName,
                                                 biography: Profile.testProfile.biography)
+        
         setUpBiography(with: profileViewModel)
         configureNavBar()
         configureSubviews()
     }
     
-    func setUpBiography(with viewModel: ProfileViewModel) {
+    func setUpBiography(with viewModel: ProfileVM) {
         profileImageView.kf.setImage(with: viewModel.avatarURL)
         firstNameLabel.text = viewModel.firstName
         lastNameLabel.text = viewModel.lastName
@@ -103,11 +104,11 @@ class AutobiographyVC: UIViewController {
         view.addSubview(scrollView)
         scrollView.autoPinEdgesToSuperviewSafeArea()
         
-        scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.autoPinEdgesToSuperviewEdges()
-        scrollViewContainer.autoMatch(.width, to: .width, of: scrollView)
+        scrollView.addSubview(scrollViewContentView)
+        scrollViewContentView.autoPinEdgesToSuperviewEdges()
+        scrollViewContentView.autoMatch(.width, to: .width, of: scrollView)
         
-        scrollViewContainer.addSubview(profileImageView)
+        scrollViewContentView.addSubview(profileImageView)
         profileImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
         profileImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
 
@@ -117,20 +118,20 @@ class AutobiographyVC: UIViewController {
         hStack.distribution = .fill
         hStack.spacing = 3
 
-        scrollViewContainer.addSubview(hStack)
+        scrollViewContentView.addSubview(hStack)
         hStack.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
         hStack.autoPinEdge(.left, to: .right, of: profileImageView, withOffset: 16)
-        hStack.autoPinEdge(.right, to: .right, of: scrollViewContainer, withOffset: -16)
+        hStack.autoPinEdge(.right, to: .right, of: scrollViewContentView, withOffset: -16)
         
-        scrollViewContainer.addSubview(biographyTitleLabel)
+        scrollViewContentView.addSubview(biographyTitleLabel)
         biographyTitleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
         biographyTitleLabel.autoPinEdge(.top, to: .bottom, of: profileImageView, withOffset: 22)
         
-        scrollViewContainer.addSubview(biographyLabel)
+        scrollViewContentView.addSubview(biographyLabel)
         biographyLabel.autoPinEdge(.top, to: .bottom, of: biographyTitleLabel, withOffset: 20)
-        biographyLabel.autoPinEdge(.left, to: .left, of: scrollViewContainer, withOffset: 24)
-        biographyLabel.autoPinEdge(.right, to: .right, of: scrollViewContainer, withOffset: -24)
-        biographyLabel.autoPinEdge(.bottom, to: .bottom, of: scrollViewContainer)
+        biographyLabel.autoPinEdge(.left, to: .left, of: scrollViewContentView, withOffset: 24)
+        biographyLabel.autoPinEdge(.right, to: .right, of: scrollViewContentView, withOffset: -24)
+        biographyLabel.autoPinEdge(.bottom, to: .bottom, of: scrollViewContentView)
     }
 
 }

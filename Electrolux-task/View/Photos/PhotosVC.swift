@@ -11,29 +11,39 @@ import Kingfisher
 
 private let reuseIdentifier = "cell"
 
-class ItemsVC: UIViewController {
+class PhotosVC: UIViewController {
     
     // MARK: - Properties
     
     private let searchController = UISearchController(searchResultsController: nil)
-    private var photos = [Photo]() {
+    private var photosViewModel = [PhotoVM]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.hideActivityIndicator()
+                self.removeLoadingView()
             }
         }
     }
-    var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-    var loadingView: UIView = UIView()
     
-    let loadingIndicatorView: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+    private let loadingView: UIView = {
+        let loadingView = UIView()
+        loadingView.autoSetDimensions(to: CGSize(width: 80, height: 60))
+        loadingView.backgroundColor = .black
+        loadingView.alpha = 0.7
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
         
-        return loadingIndicatorView
+        return loadingView
     }()
     
-    private var collectionView: UICollectionView = {
+    private let spinnerIndicatorView: UIActivityIndicatorView = {
+        let spinnerIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        spinnerIndicatorView.color = .white
+        
+        return spinnerIndicatorView
+    }()
+    
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -49,7 +59,6 @@ class ItemsVC: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configureNavBar()
         configureCollectionView()
         configureSearchBar()
         fetchElectroluxItems()
@@ -58,25 +67,41 @@ class ItemsVC: UIViewController {
     // MARK: - API
     
     func fetchElectroluxItems() {
+        
+        DispatchQueue.main.async {
+            self.showLoadingView()
+        }
+        
         let queue = DispatchQueue.global(qos: .utility)
         
         queue.async {
-            self.showActivityIndicator()
             NetworkService.shared.getElectroluxItems { [weak self] response in
-                guard let res = response.value else { print("Couldn't fetch Electrolux items"); return }
-                self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+                guard let res = response.value else {
+                    print("Couldn't fetch Electrolux items")
+                    return
+                }
+                
+                self?.photosViewModel = PhotoVM.initArray(with: res.photos.photo)
             }
         }
     }
     
     func fetchItems(with name: String) {
+        
+        DispatchQueue.main.async {
+            self.showLoadingView()
+        }
+        
         let queue = DispatchQueue.global(qos: .utility)
         
         queue.async {
-            self.showActivityIndicator()
             NetworkService.shared.getItems(with: name) { [weak self] response in
-                guard let res = response.value else { print("Couldn't fetch items with hashtag \(name)"); return }
-                self?.photos = res.photos.photo.filter { photo in return photo.urlO != nil }
+                guard let res = response.value else {
+                    print("Couldn't fetch items with hashtag \(name)")
+                    return
+                }
+                
+                self?.photosViewModel = PhotoVM.initArray(with: res.photos.photo)
             }
         }
     }
@@ -86,11 +111,12 @@ class ItemsVC: UIViewController {
     func configureUI() {
         view.backgroundColor = .white
         
+        configureNavBar()
         configureSubviews()
     }
     
     func configureCollectionView() {
-        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -98,14 +124,10 @@ class ItemsVC: UIViewController {
     func configureSubviews() {
         view.addSubview(collectionView)
         collectionView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0))
-        
-        collectionView.addSubview(loadingIndicatorView)
-        loadingIndicatorView.autoPinEdge(.top, to: .bottom, of: collectionView, withOffset: 150)
-        loadingIndicatorView.autoAlignAxis(toSuperviewAxis: .vertical)
     }
     
     func configureNavBar() {
-        navigationItem.title = "Items"
+        navigationItem.title = "Photos"
     }
     
     func configureSearchBar() {
@@ -117,54 +139,43 @@ class ItemsVC: UIViewController {
         searchController.searchBar.placeholder = "e. g. Electrolux"
     }
     
-    func showActivityIndicator() {
-        DispatchQueue.main.async {
-            self.loadingView = UIView()
-            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
-            self.loadingView.center = self.view.center
-            self.loadingView.backgroundColor = UIColor(named: "#444444")
-            self.loadingView.alpha = 0.7
-            self.loadingView.clipsToBounds = true
-            self.loadingView.layer.cornerRadius = 10
+    func showLoadingView() {
+        view.addSubview(loadingView)
+        loadingView.autoCenterInSuperview()
 
-            self.spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
-            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
-
-            self.loadingView.addSubview(self.spinner)
-            self.view.addSubview(self.loadingView)
-            self.spinner.startAnimating()
-        }
+        loadingView.addSubview(spinnerIndicatorView)
+        spinnerIndicatorView.autoCenterInSuperview()
+        
+        spinnerIndicatorView.startAnimating()
     }
 
-    func hideActivityIndicator() {
+    func removeLoadingView() {
         DispatchQueue.main.async {
-            self.spinner.stopAnimating()
+            self.spinnerIndicatorView.stopAnimating()
             self.loadingView.removeFromSuperview()
         }
     }
 
 }
 
-extension ItemsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PhotosVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photosViewModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
         cell.contentView.backgroundColor = .imagePlaceholderColor
         
-        guard let url = photos[indexPath.row].urlO else { return cell }
-        
-        let itemViewModel = ItemViewModel(photoURL: url, photoTitle: photos[indexPath.row].title)
-        cell.set(with: itemViewModel)
+        guard photosViewModel[indexPath.row].URL0 != nil else { return cell }
+
+        cell.set(with: photosViewModel[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let photoDetailsVC = PhotoDetailsVC(photo: photos[indexPath.row])
+        let photoDetailsVC = PhotoDetailsVC(photoViewModel: photosViewModel[indexPath.row])
         navigationController?.pushViewController(photoDetailsVC, animated: true)
     }
     
@@ -173,8 +184,7 @@ extension ItemsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
 }
 
-extension ItemsVC: UISearchBarDelegate {
-    
+extension PhotosVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
         fetchItems(with: searchText)

@@ -13,7 +13,7 @@ class PhotoDetailsVC: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var photoImageView: UIImageView = {
+    private let photoImageView: UIImageView = {
         let photoImageView = UIImageView()
         photoImageView.autoSetDimensions(to: CGSize(width: 300, height: 300))
         photoImageView.backgroundColor = .imagePlaceholderColor
@@ -46,11 +46,11 @@ class PhotoDetailsVC: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(photo: Photo) {
+    init(photoViewModel: PhotoVM) {
         super.init(nibName: nil, bundle: nil)
         
-        photoImageView.kf.setImage(with: URL(string: photo.urlO!))
-        photoTitleLabel.text = photo.title
+        photoImageView.kf.setImage(with: photoViewModel.URL0)
+        photoTitleLabel.text = photoViewModel.title
     }
 
     required init?(coder: NSCoder) {
@@ -69,7 +69,11 @@ class PhotoDetailsVC: UIViewController {
     // MARK: - Selectors
     
     @objc func saveImageToUserPhotoLibrary() {
-        guard let inputImage = photoImageView.image else { print("Image not found!"); return }
+        guard let inputImage = photoImageView.image else {
+            print("Image not found!")
+            return
+        }
+        
         UIImageWriteToSavedPhotosAlbum(inputImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     

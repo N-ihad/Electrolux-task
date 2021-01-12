@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProfileViewModel {
+struct ProfileVM {
     var avatarURL: URL?
     var firstName: String
     var lastName: String

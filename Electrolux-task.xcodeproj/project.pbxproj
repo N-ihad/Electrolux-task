@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		20298FB525AC4C80009522FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20298FB425AC4C80009522FE /* AppDelegate.swift */; };
 		20298FB725AC4C80009522FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20298FB625AC4C80009522FE /* SceneDelegate.swift */; };
-		20298FB925AC4C80009522FE /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20298FB825AC4C80009522FE /* ItemsVC.swift */; };
+		20298FB925AC4C80009522FE /* PhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20298FB825AC4C80009522FE /* PhotosVC.swift */; };
 		20298FBE25AC4C83009522FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20298FBD25AC4C83009522FE /* Assets.xcassets */; };
 		20298FC125AC4C83009522FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20298FBF25AC4C83009522FE /* LaunchScreen.storyboard */; };
 		20298FD525AC504B009522FE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20298FD425AC504B009522FE /* TabBarController.swift */; };
@@ -18,10 +18,10 @@
 		207F07F425AC62430020633D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F07F325AC62430020633D /* Photo.swift */; };
 		207F080A25AC692C0020633D /* PhotoDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F080925AC692C0020633D /* PhotoDetailsVC.swift */; };
 		207F081125AC6DD50020633D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F081025AC6DD50020633D /* Extensions.swift */; };
-		207F081425AC7AAC0020633D /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F081325AC7AAC0020633D /* ItemCell.swift */; };
-		207F081D25AC7BD60020633D /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F081C25AC7BD60020633D /* ItemViewModel.swift */; };
+		207F081425AC7AAC0020633D /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F081325AC7AAC0020633D /* PhotoCell.swift */; };
+		207F081D25AC7BD60020633D /* PhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F081C25AC7BD60020633D /* PhotoVM.swift */; };
 		208489FE25AC9DA0009AFED2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208489FD25AC9DA0009AFED2 /* Profile.swift */; };
-		20848A0125AC9ECD009AFED2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20848A0025AC9ECD009AFED2 /* ProfileViewModel.swift */; };
+		20848A0125AC9ECD009AFED2 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20848A0025AC9ECD009AFED2 /* ProfileVM.swift */; };
 		8E8770E4251A314206081EC5 /* Pods_Electrolux_task.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969A4DF6E309A849DD58E6AA /* Pods_Electrolux_task.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 		20298FB125AC4C80009522FE /* Electrolux-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Electrolux-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20298FB425AC4C80009522FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20298FB625AC4C80009522FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20298FB825AC4C80009522FE /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
+		20298FB825AC4C80009522FE /* PhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosVC.swift; sourceTree = "<group>"; };
 		20298FBD25AC4C83009522FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20298FC025AC4C83009522FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20298FC225AC4C83009522FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,10 +39,10 @@
 		207F07F325AC62430020633D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		207F080925AC692C0020633D /* PhotoDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsVC.swift; sourceTree = "<group>"; };
 		207F081025AC6DD50020633D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		207F081325AC7AAC0020633D /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
-		207F081C25AC7BD60020633D /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
+		207F081325AC7AAC0020633D /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		207F081C25AC7BD60020633D /* PhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVM.swift; sourceTree = "<group>"; };
 		208489FD25AC9DA0009AFED2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		20848A0025AC9ECD009AFED2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		20848A0025AC9ECD009AFED2 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		73E48D234B749FB326E9FAEA /* Pods-Electrolux-task.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Electrolux-task.debug.xcconfig"; path = "Target Support Files/Pods-Electrolux-task/Pods-Electrolux-task.debug.xcconfig"; sourceTree = "<group>"; };
 		969A4DF6E309A849DD58E6AA /* Pods_Electrolux_task.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Electrolux_task.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EFD8FA1987AC586AF1C293 /* Pods-Electrolux-task.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Electrolux-task.release.xcconfig"; path = "Target Support Files/Pods-Electrolux-task/Pods-Electrolux-task.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		20298FCA25AC4DEC009522FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				207F081C25AC7BD60020633D /* ItemViewModel.swift */,
-				20848A0025AC9ECD009AFED2 /* ProfileViewModel.swift */,
+				207F081C25AC7BD60020633D /* PhotoVM.swift */,
+				20848A0025AC9ECD009AFED2 /* ProfileVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				20298FD425AC504B009522FE /* TabBarController.swift */,
-				20DB793025AC93D400C3C844 /* ItemsTab */,
+				20DB793025AC93D400C3C844 /* Photos */,
 				20DB793125AC93F000C3C844 /* Autobiography */,
 			);
 			path = View;
@@ -139,14 +139,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		20DB793025AC93D400C3C844 /* ItemsTab */ = {
+		20DB793025AC93D400C3C844 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				20298FB825AC4C80009522FE /* ItemsVC.swift */,
-				207F081325AC7AAC0020633D /* ItemCell.swift */,
+				20298FB825AC4C80009522FE /* PhotosVC.swift */,
+				207F081325AC7AAC0020633D /* PhotoCell.swift */,
 				207F080925AC692C0020633D /* PhotoDetailsVC.swift */,
 			);
-			path = ItemsTab;
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		20DB793125AC93F000C3C844 /* Autobiography */ = {
@@ -290,14 +290,14 @@
 				207F07F425AC62430020633D /* Photo.swift in Sources */,
 				208489FE25AC9DA0009AFED2 /* Profile.swift in Sources */,
 				207F081125AC6DD50020633D /* Extensions.swift in Sources */,
-				20298FB925AC4C80009522FE /* ItemsVC.swift in Sources */,
-				207F081D25AC7BD60020633D /* ItemViewModel.swift in Sources */,
+				20298FB925AC4C80009522FE /* PhotosVC.swift in Sources */,
+				207F081D25AC7BD60020633D /* PhotoVM.swift in Sources */,
 				20298FD825AC5074009522FE /* AutobiographyVC.swift in Sources */,
-				207F081425AC7AAC0020633D /* ItemCell.swift in Sources */,
+				207F081425AC7AAC0020633D /* PhotoCell.swift in Sources */,
 				20298FD525AC504B009522FE /* TabBarController.swift in Sources */,
 				20298FB525AC4C80009522FE /* AppDelegate.swift in Sources */,
 				207F080A25AC692C0020633D /* PhotoDetailsVC.swift in Sources */,
-				20848A0125AC9ECD009AFED2 /* ProfileViewModel.swift in Sources */,
+				20848A0125AC9ECD009AFED2 /* ProfileVM.swift in Sources */,
 				207F07F125AC57290020633D /* NetworkService.swift in Sources */,
 				20298FB725AC4C80009522FE /* SceneDelegate.swift in Sources */,
 			);
