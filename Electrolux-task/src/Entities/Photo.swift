@@ -7,18 +7,16 @@
 
 import Foundation
 
-// MARK: - PhotoResponse
 struct PhotoResponse: Codable {
     let photos: Photos
 }
 
-// MARK: - Photos
 struct Photos: Codable {
     let photo: [Photo]
 }
 
-// MARK: - Photo
 struct Photo: Codable {
+
     let title: String
     let urlO: String?
     let heightO, widthO: Int?

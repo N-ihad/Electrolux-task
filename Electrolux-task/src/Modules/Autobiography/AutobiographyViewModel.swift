@@ -1,5 +1,5 @@
 //
-//  ProfileViewModel.swift
+//  AutobiographyViewModel.swift
 //  Electrolux-task
 //
 //  Created by Nihad on 1/11/21.
@@ -7,14 +7,15 @@
 
 import Foundation
 
-struct ProfileVM {
+struct AutobiographyViewModel {
+
     var avatarURL: URL?
     var firstName: String
     var lastName: String
     var biography: String
-    
+
     init(photoURL: String, firstName: String, lastName: String, biography: String) {
-        self.avatarURL = URL(string: photoURL) ?? nil
+        avatarURL = URL(string: photoURL)
         self.firstName = firstName
         self.lastName = lastName
         self.biography = biography
